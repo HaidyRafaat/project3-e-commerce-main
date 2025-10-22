@@ -2,7 +2,7 @@
 
 $config=[
     "host"=>"localhost",
-    "dbname"=>"e-commerce",
+    "dbname"=>"e-commerce2",
     "user"=>"root",
     "password"=>""
 ];
