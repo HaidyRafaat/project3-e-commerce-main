@@ -9,15 +9,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $product_id = $_POST['product_id'] ?? null;
     $rating     = $_POST['rating'] ?? null;
     $comment    = $_POST['comment'] ?? null;
-
-    // لو المستخدم داخل بحساب
     $user_id = $_SESSION['user']['id'] ?? null;
 
     if (isset($_SESSION['user'])) {
         $name  = $_SESSION['user']['name'] ?? 'Guest';
         $email = $_SESSION['user']['email'] ?? null;
     } else {
-        // لو المستخدم ضيف
         $name  = $_POST['name'] ?? 'Guest';
         $email = $_POST['email'] ?? null;
     }
@@ -29,7 +26,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $success = $review->addReview($product_id, $user_id, $name, $email, $rating, $comment);
 
         if ($success) {
-            $_SESSION['success'] = " Review added successfully!";
+            $_SESSION['review_success'] = "Review added successfully!";
+
         } else {
             $_SESSION['error'] = " Failed to add your review.";
         }
@@ -39,6 +37,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
   
-    header("Location: ./index.php?page=product-details&id=$product_id");
+    header("Location: index.php?page=product-details&id=$product_id");
     exit;
 }
